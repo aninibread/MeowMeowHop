@@ -1,0 +1,15 @@
+body {
+  background-color: powderblue;
+  }
+canvas {
+  border:1px solid #d3d3d3;
+  background-color: #ffffff;
+}
+h1 {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: aliceblue;
+}
+p {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: whitesmoke;
+}
