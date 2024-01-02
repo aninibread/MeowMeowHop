@@ -9,12 +9,13 @@ var storedHighScore;
 var meow;
 var bigStars =[];
 var watermelon = [];
+var baseUrl = 'https://pub-f279f96d372841da89bd0f36dbd5e0a4.r2.dev/';
 
 function startGame() 
 {
-    kitty = new component(52,42,"cat.png", 70, 300-30,"image");
+    kitty = new component(52,42,baseUrl+"cat.png", 70, 300-30,"image");
     myScore = new component("16px", "Monospace", "black", 800, 40, "text");
-    bigStars.push (new component (900,150,"bigStars.png",-100,0,"image"));
+    bigStars.push (new component (900,150,baseUrl+"bigStars.png",-100,0,"image"));
     highScore = new component("16px", "Monospace", "black", 700, 40, "text");
     meow = new sound("meow.mp3");
     myGameArea.start();
@@ -176,9 +177,9 @@ function updateGameArea() {
 
             meow.play();
             gameOver = new component("35px", "Monospace", "black", 358, 120, "text");
-            restartBtn = new component(70,70,"button.png", 408, 140,"image");
+            restartBtn = new component(70,70,baseUrl+"button.png", 408, 140,"image");
             gameOver.text = "GAME OVER";
-            kitty.image.src = "catDead.png";
+            kitty.image.src = baseUrl+"catDead.png";
             kitty.update();
             gameOver.update();
             restartBtn.update();
@@ -194,16 +195,16 @@ function updateGameArea() {
     myGameArea.clear();
 
     if (isEven(myGameArea.frameNo)){
-        kitty.image.src = "cat2.png";
+        kitty.image.src = baseUrl + "cat2.png";
     } else {
-        kitty.image.src = "cat.png";
+        kitty.image.src = baseUrl + "cat.png";
     }
 
     //cucumber
     if (everyinterval(gap)) {
         x = myGameArea.canvas.width;
         y = myGameArea.canvas.height - 50;
-        cucumber.push(new component(20, 50, "banana.png", x, y,"image"));
+        cucumber.push(new component(20, 50, baseUrl+"banana.png", x, y,"image"));
         gap = ranGap();
         myGameArea.frameNo = 0;
         
@@ -217,7 +218,7 @@ function updateGameArea() {
     if (myGameArea.frameNo2 == 1 || everyinterval2(900)) {
         x = 900;
         y = 0;
-        bigStars.push (new component (900,150,"bigStars.png",x,y,"image"));
+        bigStars.push (new component (900,150,baseUrl+"bigStars.png",x,y,"image"));
     }
     for (j = 0; j < bigStars.length; j += 1) {
         bigStars[j].x += -1;
@@ -228,7 +229,7 @@ function updateGameArea() {
     if (everyinterval(3)) {
         x = 3;
         y = kitty.y;
-        watermelon.push (new component (3,15, "watermelon.png", kitty.x +20, kitty.y + 13, "image"));
+        watermelon.push (new component (3,15, baseUrl+"watermelon.png", kitty.x +20, kitty.y + 13, "image"));
     }
     for (g = 0; g < watermelon.length; g += 1) {
         watermelon[g].x += -1;
@@ -260,7 +261,7 @@ function updateGameArea() {
 
     //cat tail down
     if(myGameArea.key) {
-        kitty.image.src = "catUp.png";
+        kitty.image.src = baseUrl+"catUp.png";
     }
 
     kitty.newPos();
