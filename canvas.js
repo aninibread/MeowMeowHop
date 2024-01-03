@@ -5,32 +5,33 @@ var meow, storedHighScore;
 var lastAnimationTime = Date.now();
 var animationInterval = 100;
 
-
 var totalImages = 8, loadedImages = 0;
+
 function imageLoaded() {
     loadedImages++;
     if (loadedImages === totalImages) {
-        startGame();  // Start the game only after all images have loaded
+        myGameArea.start(); // Start the game area when all images have loaded
     }
 }
 
 function loadImage(name, src) {
     var img = new Image();
-    img.onload = imageLoaded;  // Call imageLoaded when each image is loaded
+    img.onload = imageLoaded;  // Increment loadedImages when each image is loaded
     img.src = src;
     images[name] = img;
 }
 
-function startGame() {
-    loadImage('cat', 'cat.png');
-    loadImage('catDead', 'catDead.png');
-    loadImage('cat2', 'cat2.png');
-    loadImage('catUp', 'catUp.png');
-    loadImage('bigStars', 'bigStars.png');
-    loadImage('button', 'button.png');
-    loadImage('banana', 'banana.png');
-    loadImage('watermelon', 'watermelon.png');
+// Call loadImage for each image
+loadImage('cat', 'cat.png');
+loadImage('catDead', 'catDead.png');
+loadImage('cat2', 'cat2.png');
+loadImage('catUp', 'catUp.png');
+loadImage('bigStars', 'bigStars.png');
+loadImage('button', 'button.png');
+loadImage('banana', 'banana.png');
+loadImage('watermelon', 'watermelon.png');
 
+function startGame() {
     kitty = new component(52, 42, 'cat', 70, 270, 'image');
     myScore = new component('16px', 'Monospace', 'black', 800, 40, 'text');
     bigStars.push(new component(900, 150, 'bigStars', -100, 0, 'image'));
@@ -49,7 +50,7 @@ var myGameArea = {
         this.frameNo = 0;
         this.frameNo2 = 0;
         this.scoreNum = 0;
-        this.interval = setInterval(updateGameArea, 15);
+        this.interval = setInterval(updateGameArea, 10);
         window.addEventListener('keydown', function (e) {
             myGameArea.key = e.keyCode;
         })
@@ -269,6 +270,3 @@ function everyinterval2(n) {
     if ((myGameArea.frameNo2 / n) % 1 == 0) return true;
     return false;
 }
-
-// Initialize the game
-startGame();
