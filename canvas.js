@@ -5,8 +5,18 @@ var meow, storedHighScore;
 var lastAnimationTime = Date.now();
 var animationInterval = 100;
 
+
+var totalImages = 8, loadedImages = 0;
+function imageLoaded() {
+    loadedImages++;
+    if (loadedImages === totalImages) {
+        startGame();  // Start the game only after all images have loaded
+    }
+}
+
 function loadImage(name, src) {
     var img = new Image();
+    img.onload = imageLoaded;  // Call imageLoaded when each image is loaded
     img.src = src;
     images[name] = img;
 }
@@ -39,7 +49,7 @@ var myGameArea = {
         this.frameNo = 0;
         this.frameNo2 = 0;
         this.scoreNum = 0;
-        this.interval = setInterval(updateGameArea, 10);
+        this.interval = setInterval(updateGameArea, 15);
         window.addEventListener('keydown', function (e) {
             myGameArea.key = e.keyCode;
         })
