@@ -10,6 +10,6 @@ h1 {
   color: aliceblue;
 }
 p {
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  color: whitesmoke;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow', sans-serif;
+  color: rgb(9, 4, 59);
 }
