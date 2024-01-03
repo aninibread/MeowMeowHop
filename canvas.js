@@ -54,7 +54,7 @@ var myGameArea = {
         this.frameNo = 0;
         this.frameNo2 = 0;
         this.scoreNum = 0;
-        this.interval = setInterval(updateGameArea, 10);
+        this.interval = setInterval(updateGameArea, 5);
         window.addEventListener('keydown', function (e) {
             myGameArea.key = e.keyCode;
         })
