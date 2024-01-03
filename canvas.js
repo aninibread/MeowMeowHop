@@ -5,31 +5,16 @@ var meow, storedHighScore;
 var lastAnimationTime = Date.now();
 var animationInterval = 100;
 
-var totalImages = 8, loadedImages = 0;
-
-function imageLoaded() {
-    loadedImages++;
-    if (loadedImages === totalImages) {
-        myGameArea.start(); // Start the game area when all images have loaded
-    }
-}
-
-function loadImage(name, src) {
-    var img = new Image();
-    img.onload = imageLoaded;  // Increment loadedImages when each image is loaded
-    img.src = src;
-    images[name] = img;
-}
-
-// Call loadImage for each image
-loadImage('cat', 'cat.png');
-loadImage('catDead', 'catDead.png');
-loadImage('cat2', 'cat2.png');
-loadImage('catUp', 'catUp.png');
-loadImage('bigStars', 'bigStars.png');
-loadImage('button', 'button.png');
-loadImage('banana', 'banana.png');
-loadImage('watermelon', 'watermelon.png');
+var imageSources = {
+    'cat': 'cat.png',
+    'catDead': 'catDead.png',
+    'cat2': 'cat2.png',
+    'catUp': 'catUp.png',
+    'bigStars': 'bigStars.png',
+    'button': 'button.png',
+    'banana': 'banana.png',
+    'watermelon': 'watermelon.png'
+};
 
 function startGame() {
     kitty = new component(52, 42, 'cat', 70, 270, 'image');
@@ -39,6 +24,25 @@ function startGame() {
     meow = new sound('meow.mp3');
     myGameArea.start();
 }
+
+function loadImages(callback) {
+    var loadedImages = 0;
+    var totalImages = Object.keys(imageSources).length;
+
+    for (var key in imageSources) {
+        if (imageSources.hasOwnProperty(key)) {
+            images[key] = new Image();
+            images[key].onload = function() {
+                if (++loadedImages >= totalImages) {
+                    callback();
+                }
+            };
+            images[key].src = imageSources[key];
+        }
+    }
+}
+
+loadImages(startGame);
 
 var myGameArea = {
     canvas : document.createElement('canvas'),
